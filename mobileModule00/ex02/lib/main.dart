@@ -20,13 +20,13 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   final _expressionController = TextEditingController(text: '0');
-  final _resultController = TextEditingController(text: '00');
+  final _resultController = TextEditingController(text: '0');
 
   Widget button(String text) {
     return Expanded(
       child: ElevatedButton(
         onPressed: () {
-          print(text);
+          print("button pressed: $text");
         },
         child: Text(text),
       ),
@@ -39,8 +39,16 @@ class _MyPageState extends State<MyPage> {
       appBar: AppBar(title: const Text("Calculator"), centerTitle: true),
       body: Column(
         children: [
-          TextField(controller: _expressionController),
-          TextField(controller: _resultController),
+          TextField(
+            controller: _expressionController,
+            readOnly: true,
+            textAlign: TextAlign.right,
+          ),
+          TextField(
+            controller: _resultController,
+            readOnly: true,
+            textAlign: TextAlign.right,
+          ),
           Spacer(),
           Row(
             children: [
@@ -73,8 +81,8 @@ class _MyPageState extends State<MyPage> {
             children: [
               button("0"),
               button("."),
-              button("00"),
               button("="),
+              Expanded(child: SizedBox()),
               Expanded(child: SizedBox()),
             ],
           ),
