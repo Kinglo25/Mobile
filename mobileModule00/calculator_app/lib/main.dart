@@ -39,6 +39,9 @@ class _MyPageState extends State<MyPage> {
       var context = ContextModel();
       var evaluator = RealEvaluator(context);
       num eval = evaluator.evaluate(exp);
+      if (eval.isInfinite || eval.isNaN) {
+        return "Error";
+      }
       return eval.toString();
     } catch (e) {
       return "Error";
@@ -48,8 +51,10 @@ class _MyPageState extends State<MyPage> {
   void _onButtonPressed(String label) {
     if (label == "AC") {
       _expressionController.text = '0';
+      _resultController.text = '0';
     } else if (label == "C") {
-      if (_expressionController.text == '0') {
+      if (_expressionController.text == '0' ||
+          _expressionController.text.length == 1) {
         _expressionController.text = '0';
       } else {
         _expressionController.text = _expressionController.text.substring(
